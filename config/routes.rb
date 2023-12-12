@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  root to: "application#not_found"
+
+  scope 'api' do
+    post '/inbound/sms/' => 'messages#inbound'
+    post '/outbound/sms/' => 'messages#outbound'
+  end
+
+  match '*unmatched', to: 'application#not_found', via: :all
 end
